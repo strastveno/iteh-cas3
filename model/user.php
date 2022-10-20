@@ -13,23 +13,23 @@ class User
         $this->password = $password;
     }
 
-    // public static function logInUser($user, mysqli $conn)
-    // {
-    //     $username = $user->username;
-    //     $password = $user->password;
-    //     //$query = "SELECT * FROM user WHERE username='" . $user->username . "' and password='" . $user->password . "'";
-    //     //$query = "SELECT * FROM user WHERE username='$username' and password='$password'";
-    //     $query = "SELECT * FROM user WHERE username='$user->username' and password='$user->password'";
-    //     //konekcija sa bazom
-    //     return $conn->query($query);
-    // }
-
-    public static function logInUser($user, $baza)
+    public static function logInUser($user, mysqli $conn)
     {
-
-        if ($baza[0]['username'] == $user->username && $baza[0]['password'] == $user->password) {
-            return true;
-        }
-        return false;
+        $username = $user->username;
+        $password = $user->password;
+        //$query = "SELECT * FROM user WHERE username='" . $user->username . "' and password='" . $user->password . "'";
+        //$query = "SELECT * FROM user WHERE username='$username' and password='$password'";
+        $query = "SELECT * FROM user WHERE username='$user->username' and password='$user->password'";
+        //konekcija sa bazom
+        return $conn->query($query);
     }
+
+    // public static function logInUser($user, $baza)
+    // {
+
+    //     if ($baza[0]['username'] == $user->username && $baza[0]['password'] == $user->password) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 }

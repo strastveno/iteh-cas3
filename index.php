@@ -10,11 +10,11 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     $user_id = 1;
     //$conn = new mysqli();
 
-    $korisnik = new User(null, $uname, $upass);
+    $korisnik = new User($user_id, $uname, $upass);
     //$odg = $korisnik->logInUser($uname, $upass, $conn);
     //$odg = User::logInUser($korisnik, $conn); // pristup statickim funkcijama preko klase
 
-    $odg = User::logInUser($korisnik, $baza);
+    $odg = User::logInUser($korisnik, $conn);
     echo json_encode($odg);
 
     if ($odg) {
