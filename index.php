@@ -1,3 +1,42 @@
+<?php
+
+require "dbBroker.php";
+require "model/user.php";
+
+session_start();
+if (isset($_POST['username']) && isset($_POST['password'])) {
+    $uname = $_POST['username'];
+    $upass = $_POST['password'];
+    $user_id = 1;
+    //$conn = new mysqli();
+
+    $korisnik = new User(null, $uname, $upass);
+    //$odg = $korisnik->logInUser($uname, $upass, $conn);
+    //$odg = User::logInUser($korisnik, $conn); // pristup statickim funkcijama preko klase
+
+    $odg = User::logInUser($korisnik, $baza);
+    echo json_encode($odg);
+
+    if ($odg) {
+        echo `
+        <script>
+        console.log("Uspesno ste se ulogovali");
+        </script>
+        `;
+        $_SESSION['user_id'] = $korisnik->id;
+        header('Location: home.php');
+        exit();
+    } else {
+        echo `
+        <script>
+        console.log("Niste se ulogovali");
+        </script>
+        `;
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

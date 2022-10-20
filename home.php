@@ -1,3 +1,17 @@
+<?php
+
+require 'dbBroker.php';
+require 'model/prijava.php';
+
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: home.php');
+    exit();
+}
+
+$rezultat = Prijava::getAll($prijave);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,23 +60,23 @@
                 </thead>
                 <tbody>
                     <?php
-                    while ($red = $result->fetch_array()) {
+                    //while ($red = $result->fetch_array()) {
                     ?>
-                        <tr>
-                            <td><?php echo $red["predmet"] ?></td>
-                            <td><?php echo $red["katedra"] ?></td>
-                            <td><?php echo $red["sala"] ?></td>
-                            <td><?php echo $red["datum"] ?></td>
-                            <td>
-                                <label class="custom-radio-btn">
-                                    <input type="radio" name="checked-donut" value=<?php echo $red["id"] ?>>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </td>
+                    <tr>
+                        <td><?php echo $red["predmet"] ?></td>
+                        <td><?php echo $red["katedra"] ?></td>
+                        <td><?php echo $red["sala"] ?></td>
+                        <td><?php echo $red["datum"] ?></td>
+                        <td>
+                            <label class="custom-radio-btn">
+                                <input type="radio" name="checked-donut" value=<?php echo $red["id"] ?>>
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
 
-                        </tr>
+                    </tr>
                     <?php
-                    }
+                    //}
                     ?>
                 </tbody>
             </table>
